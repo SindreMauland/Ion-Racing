@@ -1,0 +1,13 @@
+254 fault ground
+251 temp fault
+250 pedal fault
+110 ratt pos
+111 suspension
+114 rpm hjul
+210 Mcu torque 
+112 Ratt pos
+113 
+248 Samme som 249
+249 Aksellerasjon og bremsepedal
+252 Temp beta formel
+253 temp ecu
