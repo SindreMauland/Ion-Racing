@@ -1,13 +1,9 @@
 import can
 import os
 import keyboard
-def start():
-    os.system("sudo ip link set can0 type can bitrate 426328")
-    os.system("sudo ifconfig can0 up")
-    global can0
-    can0 = can.interface.Bus(channel = "can0",bustype="socketcan")
-a=0
+a = 0
 def messages():
+    can0 = can.interface.Bus(channel = "can0",bustype="socketcan")
     msg = can0.recv()
 
     if msg.arbitration_id == 584 or msg.arbitration_id ==248:
@@ -23,7 +19,5 @@ def messages():
   
     if msg is None:
         print("ingen beskjed")
-start()
-while True:
-    messages()
+
 os.system("sudo ifconfig can0 down")

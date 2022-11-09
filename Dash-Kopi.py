@@ -6,18 +6,23 @@ Created on Tue Oct  4 14:54:50 2022
 """
 
 from tkinter import *
-from PIL import Image, ImageTk
+import os
+import can
 from tkinter import ttk
-MS_DELAY = 10
+from recieve import messages
+import os
+MS_DELAY = 150
+os.system("sudo ip link set can0 type can bitrate 500000")
+os.system("sudo ifconfig can0 up")
+can0 = can.interface.Bus(channel = "can0",bustype="socketcan")
 
 
-def progress():
-    pb["value"]=c
+    
 #####################################################
 #Speedometer vindu
 speedometer = Tk(className="Speedometer")
 
-speedometer.attributes('-fullscreen', True)
+#speedometer.attributes('-fullscreen', True)
 
 speedometer.configure(background='black')
 #####################################################
@@ -30,14 +35,12 @@ pb= ttk.Progressbar(
     length=400)
 pb.place(relx=0.05,rely=0.5)
 x=0
-a=0
 b=0
 c=0
-def update():
-    global x
-    global a
-    global b
-    global c
+
+def progress():
+    messages()
+    from recieve import a
     
     if x>100:
         Tsal = Label(bg="red", width=200, height=5)
@@ -61,7 +64,7 @@ def update():
     batteri12v.place(relx=0.8, rely=0.70, anchor="sw")
     
     
-    speedometer.after(MS_DELAY, update)
+
 
 
 
@@ -73,7 +76,7 @@ def update():
     speed_digits.place(relx=0.5, rely=0.45, anchor="center")
 
 
-
+    speedometer.after(MS_DELAY, progress)
 
 
 ######################################################
@@ -105,10 +108,8 @@ batteri12v.place(relx=0.8, rely=0.55, anchor="sw")
 
 exit_button = Button(speedometer, text="Exit", command=speedometer.destroy)
 exit_button.pack(pady=20)
-speedometer.after(MS_DELAY, update)
+speedometer.after(MS_DELAY, progress)
 
 
 
 speedometer.mainloop()
-while True:
-    x+=1
