@@ -1,4 +1,7 @@
-a=0
-def update():
-    global a
-    a+=1
+import sys
+
+x = 0
+while True:
+    print(x)
+    sys.stdout.flush()
+    x = x+1
