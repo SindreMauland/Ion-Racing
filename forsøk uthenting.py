@@ -2,7 +2,6 @@
 #Henter ut og oversetter data fra bilen
 import can
 import os
-import keyboard
 
 
 def messages():
@@ -42,12 +41,10 @@ def messages():
         print('Gass:',pedal_gass, 'Brems: ', pedal_brems)
 
     elif msg.arbitration_id == 594 or msg.arbitration_id == 252:
-            m1= msg.data.hex()[0:4]
             global tempMotor
-            tempMotor = int(m1, 16)/10
-            m2 = msg.data.hex()[12:]
+            tempMotor = int(msg.data.hex()[4:8], 16)/10
             global tempAir 
-            tempAir = int(m2,16)/10
+            tempAir = int(msg.data.hex()[12:],16)/10
             print ('Temp motor: ',tempMotor, ' Temp lufta', tempAir)
             
     elif  msg.arbitration_id == 595 or msg.arbitration_id == 253:

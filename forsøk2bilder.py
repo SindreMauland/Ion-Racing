@@ -22,7 +22,7 @@ speedometer.configure(background='black')
 
 #####################################################
 #temp vindu
-temperatures = Toplevel(className="Temperatures")
+temperatures = Tk(className="Temperatures")
 temperatures.attributes('-fullscreen', True)
 temperatures.configure(background='black')
 #####################################################
@@ -128,7 +128,8 @@ def speedometer_progress():
     speedometer.update()
     speedometer.after(MS_DELAY, speedometer_progress)
 
-
+speedometer.after(MS_DELAY, speedometer_progress)
+speedometer.mainloop()
 
 
 
@@ -194,40 +195,7 @@ def temp_progress():
 
 
 
+temperatures.after(MS_DELAY, temp_progress)
 
 
-
-
-
-
-
-
-
-def remove_master():
-    temperatures.withdraw()
-    speedometer.deiconify()
-    speedometer.after(MS_DELAY, speedometer_progress)
-def remove_root():
-    speedometer.withdraw()
-    temperatures.deiconify()
-    temperatures.after(MS_DELAY, temp_progress)
-
-
-
-btn1 = Button(temperatures,
-             text ="Click to open a new window",
-             command = remove_master)
-btn = Button(speedometer,
-             text ="Click to open a new window",
-             command = remove_root)
-btn1.pack(pady = 10)
-btn.pack(pady = 10)
-
-
-
-    
-
-
-remove_master()
-speedometer.after(MS_DELAY, update)
-mainloop()
+temperatures.mainloop()
