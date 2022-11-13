@@ -42,6 +42,7 @@ tempBattery = IntVar()
 #####################################################
 def remove_master():
     speedometer.deiconify()
+    speedometer.focus_
     temperatures.destroy()
     temperatures.update()
     speedometer.after(MS_DELAY, speedometer_progress)
@@ -52,6 +53,7 @@ def remove_root():
     temperatures = Toplevel()
     temperatures.attributes('-fullscreen', True)
     temperatures.configure(background='black')
+    temperatures.focus_force()
     #########################################
     #Making the Labels for temperature window
     #########################################
