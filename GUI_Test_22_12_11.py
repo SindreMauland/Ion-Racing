@@ -17,10 +17,20 @@ speedometer.attributes('-fullscreen', True)
 speedometer.configure(background='black')
 #####################################################
 
-speed= IntVar()
-tempMotor=IntVar()
-hv_verdi= IntVar()
-verdi_12v=IntVar()
+#Variables
+speed = IntVar()
+hv_verdi = IntVar()
+verdi_12v =IntVar()
+torqueCommand = IntVar()
+pedalGass = IntVar()
+pedalBrems = IntVar()
+#Temp variables 
+tempMotor =IntVar()
+tempAir = IntVar()
+tempECU = IntVar()
+tempMCU = IntVar()
+tempCoolant = IntVar()
+tempBattery = IntVar()
 
 
 def remove_temperatures():
@@ -83,41 +93,27 @@ pb= ttk.Progressbar( speedometer,variable =speed, orient="vertical",mode="determ
 
 pb.place(relx=0.05,rely=0.25)
 
-#TemperaturMotor 
+#Temperature Motor 
 temperature1 = Label(textvariable=tempMotor, font=("Century Gothic", 80), bg="black", fg="White")
 temperature1.place(relx=0.7, rely=0.9, anchor="sw")
-
-
-#Batteri Status HV
-batteristatus = Label(textvariable=speed, font=("Century Gothic", 80), bg="black", fg="White")
-batteristatus.place(relx=0.8, rely=0.45, anchor="sw")
-  
-#Batteri status 12v
-batteri12v = Label(textvariable=speed, font=("Century Gothic", 80), bg="black", fg="White")
-batteri12v.place(relx=0.8, rely=0.70, anchor="sw")
-    
-#Hastighet
-speed_digits = Label(textvariable=speed, font=("Century Gothic", 320), bg="black", fg="White")
-speed_digits.place(relx=0.4, rely=0.45, anchor="center")
-
-    
-
-
-
-#Labler til verdiene 
-######################################################
-#TemperatureMotor
-temperature2 = Label(text="Temperatur", font=("Century Gothic", 50), bg="black", fg="#119ED9")
+temperature2 = Label(text="Temperature", font=("Century Gothic", 50), bg="black", fg="#119ED9")
 temperature2.place(relx=0.7, rely=0.97, anchor="sw")
 
 #Battery Status HV
+batteristatus = Label(textvariable=speed, font=("Century Gothic", 80), bg="black", fg="White")
+batteristatus.place(relx=0.8, rely=0.45, anchor="sw")
 batterihv = Label(text="HV", font=("Century Gothic", 50), bg="black", fg="#119ED9")
-batterihv.place(relx=0.8, rely=0.30, anchor="sw")
+batterihv.place(relx=0.8, rely=0.30, anchor="sw")  
 
-#Battery Status 12V
+#Battery status 12v
+batteri12v = Label(textvariable=speed, font=("Century Gothic", 80), bg="black", fg="White")
+batteri12v.place(relx=0.8, rely=0.70, anchor="sw")
 batteri12v = Label(text="12V", font=("Century Gothic", 50), bg="black", fg="#119ED9")
-batteri12v.place(relx=0.8, rely=0.55, anchor="sw")
- 
+batteri12v.place(relx=0.8, rely=0.55, anchor="sw") 
+
+#Speed
+speed_digits = Label(textvariable=speed, font=("Century Gothic", 320), bg="black", fg="White")
+speed_digits.place(relx=0.4, rely=0.45, anchor="center")
 
 #Binding a button for the functions to display other windows
 speedometer.bind("<Return>", lambda e: remove_speedometer())
