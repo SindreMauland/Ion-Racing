@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import os
 import can
+import time
 
 MS_DELAY = 1
 os.system("sudo ip link set can0 type can bitrate 500000")
@@ -121,16 +122,18 @@ exit_button = Button(speedometer, text="Exit", command=speedometer.destroy)
 exit_button.pack(pady=20)
 
 
+
 #Gasspådrag
 
 def speedometer_progress():
 
     #Gaspådrag
-
+    
 
     ####################################################
-    msg = can0.recv()
 
+    msg = can0.recv()
+ 
     if msg.arbitration_id == 256 or msg.arbitration_id ==100: #Errorcode battery
         print ('fault battety')
 
@@ -152,7 +155,10 @@ def speedometer_progress():
         pedal_brems = int(m2,16)/100
 
         pedal_gass= int(msg.data.hex()[0:4],16)/100
+
         
+        if pedal_gass>=95:
+            remove_speedometer()
         if pedal_gass>=50:
             Tsal = Label(bg="red", width=200, height=5)
             Tsal.place(relx=0.5,rely=0.07, anchor="n")
@@ -172,6 +178,7 @@ def speedometer_progress():
 
     elif msg.arbitration_id == 596 or msg.arbitration_id == 254: #Fault GND
         print()
+
 
     pb["value"]==speed
 
@@ -218,3 +225,9 @@ speedometer.after(MS_DELAY, speedometer_progress)
 
 
 mainloop()
+
+
+
+
+
+
