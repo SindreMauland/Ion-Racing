@@ -118,7 +118,9 @@ def progress():
 
     elif msg.arbitration_id == 596 or msg.arbitration_id == 254: #Fault GND
         print()
+
     pb["value"]==speed
+
 
 
 ###############################################################
